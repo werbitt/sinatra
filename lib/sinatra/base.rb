@@ -315,6 +315,13 @@ module Sinatra
       options[:layout] = false
       render :sass, template, options, locals
     end
+    
+    def scss(template, options={}, locals={})
+      options[:layout] = false
+      options[:ext] = 'scss'
+      options[:syntax] = :scss
+      render :sass, template, options, locals
+    end
 
     def less(template, options={}, locals={})
       options[:layout] = false
@@ -366,7 +373,8 @@ module Sinatra
             body = body.call if body.respond_to?(:call)
             template.new(path, line.to_i, options) { body }
           else
-            path = ::File.join(views, "#{data}.#{engine}")
+            ext = options.delete(:ext) || engine
+            path = ::File.join(views, "#{data}.#{ext}")
             template.new(path, 1, options)
           end
         when data.is_a?(Proc) || data.is_a?(String)

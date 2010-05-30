@@ -23,6 +23,12 @@ class SassTest < Test::Unit::TestCase
     assert ok?
     assert_equal "#sass {\n  background-color: white; }\n", body
   end
+  
+  it 'renders .scss files in views path' do
+    sass_app { scss :hello }
+    assert ok?
+    assert_equal "#scss {\n  background-color: white; }\n", body
+  end
 
   it 'ignores the layout option' do
     sass_app { sass :hello, :layout => :layout2 }

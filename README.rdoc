@@ -191,6 +191,13 @@ The sass gem/library is required to render Sass templates:
 
 Renders <tt>./views/stylesheet.sass</tt>.
 
+  get '/stylesheet.css' do
+    content_type 'text/css', :charset => 'utf-8'
+    scss :stylesheet
+  end
+
+Renders <tt>./views/stylesheet.scss</tt>.
+
 {Sass' options}[http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#options]
 can be set globally through Sinatra's configurations,
 see {Options and Configurations}[http://www.sinatrarb.com/configuration.html],
